@@ -131,6 +131,8 @@ public:
 
   virtual Planner::CacheAudit cache_audit() const = 0;
 
+  virtual void clear_cache() const = 0;
+
   virtual ~Interface() = default;
 };
 

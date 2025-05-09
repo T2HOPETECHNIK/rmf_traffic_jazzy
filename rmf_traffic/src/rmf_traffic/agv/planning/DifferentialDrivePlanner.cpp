@@ -2826,7 +2826,6 @@ void DifferentialDrivePlanner::clear_inner_cache() const
 //==============================================================================
 Planner::CacheAudit DifferentialDrivePlanner::cache_audit() const
 {
-
   auto audit = Planner::CacheAudit::Implementation{
     _cache->get().size(),
     _shortest_path->cache_size(),
@@ -2834,6 +2833,12 @@ Planner::CacheAudit DifferentialDrivePlanner::cache_audit() const
   };
 
   return Planner::CacheAudit::Implementation::make(audit);
+}
+
+//==============================================================================
+void DifferentialDrivePlanner::clear_cache() const
+{
+  _cache->get().clear();
 }
 
 } // namespace planning
