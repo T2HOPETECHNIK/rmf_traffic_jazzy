@@ -62,11 +62,14 @@ public:
 
   void clear_inner_cache() const final;
 
+  Planner::CacheAudit cache_audit() const final;
+
   std::optional<double> compute_heuristic(const Planner::Start& start) const;
 
 private:
   Planner::Configuration _config;
   std::shared_ptr<const Supergraph> _supergraph;
+  std::shared_ptr<const ShortestPathHeuristic> _shortest_path;
   CacheManagerPtr<DifferentialDriveHeuristic> _cache;
 };
 

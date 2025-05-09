@@ -244,6 +244,10 @@ public:
 
   void clear_heuristic_cache() const;
 
+  std::size_t cache_size() const;
+
+  std::size_t heuristic_cache_size() const;
+
   ~BidirectionalForest();
 
 private:

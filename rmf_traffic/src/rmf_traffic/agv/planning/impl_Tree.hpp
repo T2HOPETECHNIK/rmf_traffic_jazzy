@@ -382,10 +382,31 @@ void BidirectionalForest<T>::clear_cache() const
 
 //==============================================================================
 template<typename T>
+std::size_t BidirectionalForest<T>::cache_size() const
+{
+    SpinLock lock(_solutions_mutex);
+    std::size_t count = 0;
+    for (const auto& [_, goals] : _solutions)
+    {
+      count += goals.size();
+    }
+
+    return count;
+}
+
+//==============================================================================
+template<typename T>
 void BidirectionalForest<T>::clear_heuristic_cache() const
 {
   // TODO: This is not implemented yet, but there should not be any negative
   // impact on behavior by doing nothing here.
+}
+
+//==============================================================================
+template<typename T>
+std::size_t BidirectionalForest<T>::heuristic_cache_size() const
+{
+  return _heuristic_cache->net_size();
 }
 
 //==============================================================================

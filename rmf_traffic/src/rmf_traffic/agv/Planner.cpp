@@ -1058,6 +1058,12 @@ void Planner::clear_inner_cache() const
 }
 
 //==============================================================================
+auto Planner::cache_audit() const -> CacheAudit
+{
+  return _pimpl->interface->cache_audit();
+}
+
+//==============================================================================
 const Eigen::Vector3d& Plan::Waypoint::position() const
 {
   return _pimpl->position;
@@ -1152,6 +1158,31 @@ double Plan::get_cost() const
 Plan::Plan()
 {
   // Do nothing
+}
+
+//==============================================================================
+Planner::CacheAudit::CacheAudit()
+  : _pimpl(rmf_utils::make_impl<Implementation>())
+{
+  // Do nothing
+}
+
+//==============================================================================
+std::size_t Planner::CacheAudit::differential_drive_planner_cache_size() const
+{
+  return _pimpl->differential_drive_planner_cache_size;
+}
+
+//==============================================================================
+std::size_t Planner::CacheAudit::shortest_path_cache_size() const
+{
+  return _pimpl->shortest_path_cache_size;
+}
+
+//==============================================================================
+std::size_t Planner::CacheAudit::euclidean_heuristic_cache_size() const
+{
+  return _pimpl->euclidean_heuristic_cache_size;
 }
 
 //==============================================================================
@@ -1407,3 +1438,20 @@ std::size_t Planner::Debug::node_count(const Planner::Result& result)
 
 } // namespace agv
 } // namespace rmf_traffic
+
+namespace std {
+
+//==============================================================================
+ostream& operator<<(
+  ostream& os,
+  const rmf_traffic::agv::Planner::CacheAudit& audit)
+{
+  os << "Cache sizes:"
+     << "\n - DifferentialDrive: " << audit.differential_drive_planner_cache_size()
+     << "\n - ShortestPath: " << audit.shortest_path_cache_size()
+     << "\n - Euclidean: " << audit.euclidean_heuristic_cache_size();
+
+  return os;
+}
+
+} // namespace std
