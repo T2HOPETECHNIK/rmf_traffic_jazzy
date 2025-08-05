@@ -601,6 +601,8 @@ public:
       const StartSet& start,
       std::size_t goal_vertex) const;
 
+  void clear_inner_cache() const;
+
   class Implementation;
   class Debug;
 private:

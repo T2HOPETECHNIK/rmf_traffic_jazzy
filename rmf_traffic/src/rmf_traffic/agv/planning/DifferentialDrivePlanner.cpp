@@ -2815,6 +2815,12 @@ std::optional<PlanData> DifferentialDrivePlanner::debug_step(
     input_debugger).step(_supergraph, _cache->get());
 }
 
+//==============================================================================
+void DifferentialDrivePlanner::clear_inner_cache() const
+{
+  _cache->inner()->clear_inner_heuristic();
+}
+
 } // namespace planning
 } // namespace agv
 } // namespace rmf_traffic

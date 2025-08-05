@@ -1052,6 +1052,12 @@ auto Planner::quickest_path(
 }
 
 //==============================================================================
+void Planner::clear_inner_cache() const
+{
+  _pimpl->interface->clear_inner_cache();
+}
+
+//==============================================================================
 const Eigen::Vector3d& Plan::Waypoint::position() const
 {
   return _pimpl->position;

@@ -374,6 +374,22 @@ std::optional<double> BidirectionalForest<T>::get_cost(
 
 //==============================================================================
 template<typename T>
+void BidirectionalForest<T>::clear_cache() const
+{
+  SpinLock lock(_solutions_mutex);
+  _solutions.clear();
+}
+
+//==============================================================================
+template<typename T>
+void BidirectionalForest<T>::clear_heuristic_cache() const
+{
+  // TODO: This is not implemented yet, but there should not be any negative
+  // impact on behavior by doing nothing here.
+}
+
+//==============================================================================
+template<typename T>
 BidirectionalForest<T>::~BidirectionalForest()
 {
   if constexpr (T::count_usage)
